@@ -1,79 +1,25 @@
-<div class="controls text-center">
-  <button type="button" ng-click="rap()">
-    <span class="glyphicon glyphicon-play"></span>
-  </button>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <blockquote id="rapper-1-lyrics">
-      Said dog, listen dog, welcome back to the Midwest Ars<br>
-      On some real shit<br>
-      I didn't even expect you to be standing in this bitch with me<br>
-      But start panicking nigga, I might have Trick with me<br>
-      Yeah, now I know you done heard that shit from a lot of lips<br>
-      But you ain't hear it from my lips, sissy<br>
-      On my hood I was in the building when they asked you if you know Suge<br>
-      Bitch you shook yo head head like it was a no good and that shit shifty<br>
-      Now Uncle Trick, run the D He got a lotta of goons and that's a big city<br>
-      But fuck denying my brother, nigga, we woulda had to get busy<br>
-      Aye Ray Swag, ask me if I know X, ask me if I know Miles<br>
-      Ask me if I know Cash<br>
-      You said you was gonna ask me if I know Cal<br>
-      I ain't bout to tell that man, no nigga that's yo style<br>
-      All them niggas my niggas and bitch it can go down<br>
-      That nigga Has he told me about<br>
-      When you sent that nigga up there to knock me out<br>
-      How come I ain't get off right thing?<br>
-      You sent your goon to come kill me, I ain't die and he's still alive<br>
-      How's that boss like then?<br>
-      When I came to that state you live that false life in<br>
-      We put our back to the bricks and we talk like men<br>
-      And that's the real fucking story<br>
-      Bitch boy running around with his emotional thug issues<br>
-      This some battle rap shit dog<br>
-      Personally, I'm not 'bout to hold no grudge with you<br>
-      Wouldn't give a fuck if a bug bit you, you little fudgesicle<br>
-      Just don't fuck with me cuz I love pistols<br>
-      Now I peep, you keep about two or three Bloods with you<br>
-      That's cool, I got a mac-90, y'all gon see rip out SCUD missiles<br>
-      And every Blood with you gon bleed blood with you<br>
-      All that gun smokin' will I have his lungs open like bud crystals<br>
-      30 out that 40 or a couple pokes from that knife<br>
-      Will have you pourin' out that pipe like you got mud with you<br>
-      Now let me guess<br>
-      When you ain't pedicure toed glossed steppin' or cross dressin'<br>
-      What you in the hood bussin Eagle's probably?<br>
-      Nigga get the fuck on<br>
-      I'm comin' thick and all my fuckin' people follow me<br>
-      But pause this shit for a minute<br>
-      And let me know if I'm fucking speakin' properly<br>
-      Cuz I heard that nigga Treach own UW<br>
-      So basically you livin' off of other people property<br>
-      Speakin' of that, I know why they call yo league UW<br>
-      Cuz against that nigga Hollow Da Don and Tech 9<br>
-      We heard bars that you double used<br>
-      He told everybody in Jersey that he checked out on me<br>
-      Let's say that did happen, if that's the truth dog<br>
-      That just gotta prove that this nigga ain't even 'bout big action<br>
-      Cuz I ain't sayin' you gotta kill a nigga but if it's problems like that<br>
-      I'ma at least steal a nigga and leave the kid napping<br>
-      That's crazy right cuz when you steal a nigga that's kidnapping<br>
-      You show up on Twitter about me whippin' out the phone<br>
-      But the other day me and my nigga watched your battle with Charron<br>
-      He like "I hope he kill the white boy"<br>
-      I'm like "nigga, I hope he kill the white boy with you"<br>
-      Soon as I thought you was 'bout to zone out I got hype for a little<br>
-      Cuz I thought you was finna go your own route<br>
-      Here he go dick suckin'<br>
-      Pull one of my moves and whip the fuckin' phone out<br>
-      He like you choose like knife or pistol and y'all believin' this fag nigga<br>
-      Just like them comedian-ass niggas lettin' them white boys bitch you<br>
-      This nigga Ars think he bout to school a nigga so now I got to teach yo ass<br>
-      I might pull that mag out, hollow heat seek yo ass<br>
-      Aye Paul George, for that clown shit you said in person<br>
-      I wanna meet yo ass<br>
-      Cuz I'ma do you like the NBA did him and use the Heat to beat yo ass<br>
-      Light work!
-    </blockquote>
+<form class="form-horizontal">
+  <div ng-repeat="rapbot in rapbots" class="form-group rapbot">
+    <label class="control-label col-sm-3" for="rapbot-lyrics-{{$index}}">
+      Rapbot #{{$index + 1}} lyrics:
+    </label>
+    <div class="col-sm-9">
+      <textarea ng-model="rapbot.lyrics" placeholder="Lyrics" id="rapbot-lyrics-{{$index}}" class="rapbot-lyrics form-control"></textarea>
+    </div>
   </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button class="btn btn-default" ng-click="add_rapbot()" type="button">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add Rapbot
+      </button>
+    </div>
+  </div>
+</form>
+<hr>
+<div class="form-group text-center">
+  <button type="button" class="btn btn-primary btn-lg" ng-click="rap()">
+    <span class="glyphicon glyphicon-play"></span>
+    Rap
+  </button>
 </div>

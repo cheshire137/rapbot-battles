@@ -9,6 +9,13 @@
 ###
 angular.module('rapbotBattlesApp')
   .controller 'MainCtrl', ['$scope', '$timeout', 'SpeechChunker', ($scope, $timeout, SpeechChunker) ->
+    $scope.rapbots = []
+
+    $scope.add_rapbot = ->
+      $scope.rapbots.push(new Rapbot())
+
+    $scope.add_rapbot()
+
     # speak_lines = (lines, index) ->
     #   line = lines[index]
     #   console.log line
