@@ -10,37 +10,32 @@
 angular.module('rapbotBattlesApp')
   .controller 'MainCtrl', ['$scope', '$timeout', 'SpeechChunker', ($scope, $timeout, SpeechChunker) ->
     $scope.rapbots = []
+    $scope.voices = []
 
     $scope.add_rapbot = ->
       $scope.rapbots.push(new Rapbot())
 
     $scope.add_rapbot()
 
-    # speak_lines = (lines, index) ->
-    #   line = lines[index]
-    #   console.log line
-    #   voices = window.speechSynthesis.getVoices()
-    #   msg = new SpeechSynthesisUtterance()
-    #   msg.voice = voices[2]
-    #   # msg.voiceURI = 'native'
-    #   # msg.volume = 1
-    #   # msg.rate = 1
-    #   # msg.pitch = 2
-    #   msg.text = line
-    #   # msg.lang = 'en-us'
-    #   msg.onend = (event) ->
-    #     console.log 'Finished in', event.elapsedTime, 'seconds'
-    #   speechSynthesis.speak(msg)
+    $scope.rap = (index) ->
+      $scope.rapbots[index].rap SpeechChunker, ->
+        console.log 'finished rapbot', index
+        if index + 1 < $scope.rapbots.length
+          rapbots_rap index + 1
+        else
+          console.log 'finished all rapbots'
 
-    $scope.rap = ->
-      text = document.getElementById('rapper-1-lyrics').textContent
-      # lines = (line.trim() for line in text.split("\n"))
-      # lines = (line for line in lines when line != '')
-      # paragraph = lines.join(".\n")
-      # speak_lines lines, 0
-      utterance = new SpeechSynthesisUtterance(text)
-      voices = speechSynthesis.getVoices()
-      utterance.voice = voices[2]
-      SpeechChunker.chunk utterance, {chunk_size: 120}, ->
-        console.log 'finished rapper 1'
+    $scope.rapbots_ready = ->
+      for rapbot in $scope.rapbots
+        return false if !rapbot.has_lyrics() || !rapbot.voice
+      true
+
+    window.speechSynthesis.onvoiceschanged = ->
+      $scope.$apply ->
+        $scope.voices.splice(idx, 1) for idx, voice of $scope.voices
+        for voice in window.speechSynthesis.getVoices()
+          $scope.voices.push voice
+        for rapbot in $scope.rapbots
+          unless rapbot.voice
+            rapbot.voice = $scope.voices[2]
   ]
