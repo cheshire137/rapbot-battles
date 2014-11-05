@@ -30,7 +30,6 @@ angular.module('rapbotBattlesApp')
             chunk = line
           else
             bits = line.split(/\s/)
-            console.log bits
             index = 0
             while index < bits.length
               if chunk.length + bits[index].length < chunk_size
@@ -43,8 +42,8 @@ angular.module('rapbotBattlesApp')
         if typeof chunks[0] != 'undefined' && chunks[0].length > 2
           chunk = chunks[0]
           new_utterance = new SpeechSynthesisUtterance(chunk)
-          for x in utterance
-            if utterance.hasownproperty(x) && x != 'text'
+          for x of utterance
+            if utterance.hasOwnProperty(x) && x != 'text'
               new_utterance[x] = utterance[x]
           new_utterance.onend = =>
             settings.offset = settings.offset || 0

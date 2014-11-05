@@ -2,7 +2,7 @@ class Rapbot
   constructor: (data) ->
     data ||= {}
     @lyrics = data.lyrics || ''
-    @voice = data.voice
+    @voice_index = data.voice_index
     @pitch = data.pitch || 1
     @rate = data.rate || 5
     @volume = data.volume || 1
@@ -12,11 +12,14 @@ class Rapbot
     @lyrics.replace(/\s/g, '') != ''
 
   rap: (SpeechChunker, callback) ->
-    utterance = new SpeechSynthesisUtterance(@lyrics)
-    utterance.voice = @voice if @voice
+    utterance = new SpeechSynthesisUtterance()
+    if @voice_index
+      voices = window.speechSynthesis.getVoices()
+      utterance.voice = voices[@voice_index]
     utterance.pitch = @pitch
     utterance.rate = @rate
     utterance.volume = @volume
+    utterance.text = @lyrics
     SpeechChunker.chunk utterance, {chunk_size: 120}, ->
       callback() if callback
 
