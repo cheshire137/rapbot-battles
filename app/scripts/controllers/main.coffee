@@ -41,7 +41,7 @@ angular.module('rapbotBattlesApp')
 
     $scope.rapbots_ready = ->
       for rapbot in $scope.rapbots
-        return false if !rapbot.has_lyrics() || !rapbot.voice_index
+        return false unless rapbot.has_lyrics()
       true
 
     window.speechSynthesis.onvoiceschanged = ->
@@ -51,7 +51,4 @@ angular.module('rapbotBattlesApp')
           $scope.voices.push
             index: index
             name: voice.name
-        for rapbot in $scope.rapbots
-          unless rapbot.voice_index
-            rapbot.voice_index = 2 # Google UK Female
   ]

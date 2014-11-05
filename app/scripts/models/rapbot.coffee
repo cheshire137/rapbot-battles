@@ -2,7 +2,7 @@ class Rapbot
   constructor: (data) ->
     data ||= {}
     @lyrics = data.lyrics || ''
-    @voice_index = data.voice_index
+    @voice_index = data.voice_index || 2 # Google UK Female
     @pitch = data.pitch || 1
     @rate = data.rate || 5
     @volume = data.volume || 1
