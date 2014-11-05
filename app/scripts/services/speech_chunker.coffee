@@ -13,16 +13,12 @@ angular.module('rapbotBattlesApp')
       chunk: (utterance, settings, callback) ->
         settings = settings || {}
         chunk_size = settings.chunk_size || 160
-        # regex = new RegExp('^.{' + Math.floor(chunk_size / 2) + ',' + chunk_size + '}[\.\!\?\,]{1}|^.{1,' + chunk_size + '}$|^.{1,' + chunk_size + '} ')
         if settings && typeof settings.offset != 'undefined'
           txt = utterance.text.substring(settings.offset)
         else
           txt = utterance.text
-        # chunks = txt.match(regex)
-        # unless chunks
         lines = (line.trim() for line in txt.split(/[\n.?!,]/))
         lines = (line + ',' for line in lines when line != '')
-        console.log 'lines:', lines
         chunks = []
         chunk = ''
         for line in lines
@@ -44,7 +40,6 @@ angular.module('rapbotBattlesApp')
                 chunk = bits[index]
               index += 1
         chunks.push chunk
-        console.log 'chunks:', chunks
         if typeof chunks[0] != 'undefined' && chunks[0].length > 2
           chunk = chunks[0]
           new_utterance = new SpeechSynthesisUtterance(chunk)

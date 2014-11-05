@@ -31,8 +31,8 @@ angular.module('rapbotBattlesApp')
       true
 
     window.speechSynthesis.onvoiceschanged = ->
+      return if $scope.voices.length > 0
       $scope.$apply ->
-        $scope.voices.splice(idx, 1) for idx, voice of $scope.voices
         for voice in window.speechSynthesis.getVoices()
           $scope.voices.push voice
         for rapbot in $scope.rapbots

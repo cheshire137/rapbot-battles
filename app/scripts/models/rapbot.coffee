@@ -12,10 +12,8 @@ class Rapbot
     @lyrics.replace(/\s/g, '') != ''
 
   rap: (SpeechChunker, callback) ->
-    console.log 'rap with voice', @voice
     utterance = new SpeechSynthesisUtterance(@lyrics)
-    if @voice
-      utterance.voice = @voice
+    utterance.voice = @voice if @voice
     utterance.pitch = @pitch
     utterance.rate = @rate
     utterance.volume = @volume
