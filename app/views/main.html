@@ -1,23 +1,49 @@
-<div class="page-header">
-  <h1 id="page-title clearfix">
-    <button type="button" class="btn btn-primary btn-lg pull-right" ng-click="rap(0)" ng-disabled="!rapbots_ready()">
-      <span class="glyphicon glyphicon-play"></span>
-      Rap
-    </button>
-    Rapbot Battles
-  </h1>
-</div>
-<div class="row">
-  <div class="col-sm-8">
-    <form class="form-horizontal">
-      <fieldset ng-repeat="rapbot in rapbots" class="rapbot">
-        <legend>Rapbot #{{$index + 1}}</legend>
+<header class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#rapbot-form-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Rapbot Battles</a>
+    </div>
+    <nav class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <button class="btn btn-default" ng-click="add_rapbot()" type="button">
+          <span class="glyphicon glyphicon-plus"></span>
+          Add Rapbot
+        </button>
+      </form>
+      <form class="navbar-form navbar-right">
+        <button type="button" class="btn btn-primary" ng-click="rap(0)" ng-disabled="!rapbots_ready()">
+          <span class="glyphicon glyphicon-play"></span>
+          Rap
+        </button>
+      </form>
+    </nav>
+  </div>
+</header>
+<div class="container">
+  <form class="form-horizontal">
+    <fieldset ng-repeat="rapbot in rapbots" class="rapbot">
+      <legend class="clearfix">
+        <a class="pull-right" ng-click="remove_rapbot($index)" ng-hide="rapbots.length == 1">
+          <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        Rapbot #{{$index + 1}}
+      </legend>
+      <div class="col-sm-6">
         <div class="form-group">
           <label class="control-label col-sm-2" for="rapbot-lyrics-{{$index}}">
             Lyrics:
           </label>
           <div class="col-sm-10">
             <textarea ng-model="rapbot.lyrics" placeholder="Lyrics" id="rapbot-lyrics-{{$index}}" class="form-control rapbot-lyrics"></textarea>
+            <p class="help-block">
+              <em>Suggestion:</em> <a href="http://battlerap.com/lyrics" target="_blank">battlerap.com</a> for lyrics
+            </p>
           </div>
         </div>
         <div class="form-group">
@@ -28,14 +54,16 @@
             <select ng-model="rapbot.voice_index" ng-options="voice.index as voice.name for voice in voices" class="form-control"></select>
           </div>
         </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group">
           <label for="rapbot-pitch-{{$index}}" class="col-sm-2 control-label">
             Pitch:
           </label>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <input type="range" ng-model="rapbot.pitch" min="0" max="2" step="1">
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-3">
             <label class="control-label">{{rapbot.pitch}} of 2</label>
           </div>
         </div>
@@ -43,10 +71,10 @@
           <label for="rapbot-rate-{{$index}}" class="col-sm-2 control-label">
             Rate:
           </label>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <input type="range" ng-model="rapbot.rate" min="0.1" max="10" step="0.1">
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-3">
             <label class="control-label">{{rapbot.rate}} of 10</label>
           </div>
         </div>
@@ -54,22 +82,14 @@
           <label for="rapbot-volume-{{$index}}" class="col-sm-2 control-label">
             Volume:
           </label>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <input type="range" ng-model="rapbot.volume" min="0" max="1" step="1">
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-3">
             <label class="control-label">{{rapbot.volume}} of 1</label>
           </div>
         </div>
-      </fieldset>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10 text-right">
-          <button class="btn btn-default" ng-click="add_rapbot()" type="button">
-            <span class="glyphicon glyphicon-plus"></span>
-            Add Rapbot
-          </button>
-        </div>
       </div>
-    </form>
-  </div>
+    </fieldset>
+  </form>
 </div>

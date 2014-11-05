@@ -14,12 +14,22 @@ angular.module('rapbotBattlesApp')
 
     $scope.add_rapbot = ->
       if $scope.rapbots.length > 0
-        voice_index = $scope.rapbots[$scope.rapbots.length - 1].voice_index
+        last_rapbot = $scope.rapbots[$scope.rapbots.length - 1]
+        voice_index = last_rapbot.voice_index
+        rate = last_rapbot.rate
+        pitch = last_rapbot.pitch
+        volume = last_rapbot.volume
       new_rapbot = new Rapbot
         voice_index: voice_index
+        rate: rate
+        pitch: pitch
+        volume: volume
       $scope.rapbots.push new_rapbot
 
     $scope.add_rapbot()
+
+    $scope.remove_rapbot = (index) ->
+      $scope.rapbots.splice(index, 1)
 
     $scope.rap = (index) ->
       $scope.rapbots[index].rap SpeechChunker, ->

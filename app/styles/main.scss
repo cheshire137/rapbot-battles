@@ -3,6 +3,44 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+a, .btn {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+a {
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+a[ng-click] {
+  cursor: pointer;
+}
+
+.animate {
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: 0.25s ease-in-out all;
+  }
+
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition: 0.25s ease-in-out all;
+  }
+}
+
+body {
+  padding-top: 80px;
+}
+
 input[type="range"] {
   height: $input-height-base;
   line-height: $line-height-base;
